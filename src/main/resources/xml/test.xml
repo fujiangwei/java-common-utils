@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<PDMDataFile forceSend = "N" containerName = "Test_PRC1">
+    <Part PartID = "VCI_20150714_001" Version = "---" Revision = "" ParentUUID = "">
+        <Attributes>
+            <PartName></PartName>
+            <PartType>装配</PartType>
+            <PartDesc></PartDesc>
+            <PartUuid>5D0000077B</PartUuid>
+            <CreatedBy></CreatedBy>
+            <UpdatedBy>DES01</UpdatedBy>
+            <Effectivity>1-5</Effectivity>
+            <CreatedTime>2015-07-14 17:03:25</CreatedTime>
+            <LastUpdated>2015-07-22 09:42:07</LastUpdated>
+            <lifecycleState>UnderReview</lifecycleState>
+            <ibaAttr Type = "String" CHName = "A" ENName = "DP_Maturaty">A</ibaAttr>
+        </Attributes>
+        <BomUses/>
+    </Part>
+    <Part PartID = "VCI_20150714_002" Version = "---" Revision = "6" ParentUUID = "">
+        <Attributes>
+            <PartName></PartName>
+            <PartType>线路图</PartType>
+            <PartDesc></PartDesc>
+            <PartUuid>9C00000785</PartUuid>
+            <CreatedBy></CreatedBy>
+            <UpdatedBy>EV5ADM</UpdatedBy>
+            <Effectivity>1-5</Effectivity>
+            <CreatedTime>2015-07-14 18:21:16</CreatedTime>
+            <LastUpdated>2015-07-14 18:21:17</LastUpdated>
+            <lifecycleState>In Work</lifecycleState>
+            <ibaAttr Type = "String" CHName = "B" ENName = "DP_Maturaty">B</ibaAttr>
+        </Attributes>
+        <BomUses>
+            <Bom PartID = "VCI_20150609_003" PartUUID = "7300000788"/>
+        </BomUses>
+    </Part>
+</PDMDataFile>
