@@ -1,6 +1,6 @@
 package com.common.util.xml.jdom;
 
-import com.common.util.xml.domain.StudentGridlb;
+import com.common.util.domain.StudentGridlb;
 import org.jdom.*;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;

@@ -2,7 +2,7 @@ package com.common.util.xml.xstream;
 
 import com.alibaba.fastjson.JSON;
 import com.common.util.xml.dom4j.Dom4jUtil;
-import com.common.util.xml.domain.*;
+import com.common.util.domain.*;
 import com.common.util.xml.xstream.convert.FieldConverter;
 import com.common.util.xml.xstream.convert.IbaAttrConvertor;
 import com.google.common.collect.Lists;
@@ -244,8 +244,8 @@ public class XMLUtils {
                 ExecSQLPackage.class, Maps.newHashMap());
 
         System.out.println(JSON.toJSON(execSQLPackage1));
-        String path = Thread.currentThread().getContextClassLoader().getResource("xml/test.xml").getPath();
 
+        String path = Thread.currentThread().getContextClassLoader().getResource("xml/test.xml").getPath();
         fromXML(path);
     }
 }

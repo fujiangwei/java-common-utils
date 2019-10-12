@@ -1,6 +1,6 @@
 package com.common.util.xml.utils;
 
-import com.common.util.xml.domain.User;
+import com.common.util.domain.User;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;

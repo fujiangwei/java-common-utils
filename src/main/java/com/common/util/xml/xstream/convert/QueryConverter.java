@@ -1,6 +1,6 @@
 package com.common.util.xml.xstream.convert;
 
-import com.common.util.xml.domain.Query;
+import com.common.util.domain.Query;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;

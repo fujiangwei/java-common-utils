@@ -1,4 +1,4 @@
-package com.common.util.xml.domain;
+package com.common.util.domain;
 
 import lombok.Data;
 

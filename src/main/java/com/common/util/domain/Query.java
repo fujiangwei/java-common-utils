@@ -1,4 +1,4 @@
-package com.common.util.xml.domain;
+package com.common.util.domain;
 
 import com.common.util.xml.annotations.FieldValue;
 import com.common.util.xml.xstream.convert.QueryConverter;
