@@ -13,10 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.util.Assert;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Date;
 
 /**
@@ -34,7 +31,7 @@ public class ExcelUtil {
             for (int i = 0; i < sheet.getLastRowNum(); i ++) {
                 //获取索引为i的行，以0开始
                 Row row = sheet.getRow(i);
-                row.getCell(0).getStringCellValue();
+                System.out.println(row.getCell(0).getStringCellValue());
             }
         } catch (Exception e) {
             log.error("importExcel fail,{}", e);
@@ -405,6 +402,12 @@ public class ExcelUtil {
     public static void main(String[] args) throws Exception {
         String path = Thread.currentThread().getContextClassLoader().getResource(".").getPath();
 //        excelTest(path + "user.xls");
-        docTest(path + "user.doc");
+//        docTest(path + "user.doc");
+
+        String fileName = Thread.currentThread().getContextClassLoader().getResource("excel/table.xlsx").getPath();
+
+        File file = new File(fileName);
+        importExcel(file);
+        System.out.println("123");
     }
 }

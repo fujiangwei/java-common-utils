@@ -1,6 +1,7 @@
 package com.common.util.excel;
 
 import com.common.util.domain.ExcelData;
+import com.google.common.base.Joiner;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Font;
@@ -20,6 +21,7 @@ import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j(topic = "ExportExcelUtils")
 public class ExportExcelUtils {
@@ -246,9 +248,9 @@ public class ExportExcelUtils {
             int rows = sheet.getPhysicalNumberOfRows();
             for (int i = 0; i < rows; i++) {
                 //过滤表头行
-                if (i == 0) {
-                    continue;
-                }
+//                if (i == 0) {
+//                    continue;
+//                }
                 //获取当前行的数据
                 Row row = sheet.getRow(i);
                 Object[] objects = new Object[row.getPhysicalNumberOfCells()];
@@ -277,6 +279,28 @@ public class ExportExcelUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        String fileName = Thread.currentThread().getContextClassLoader().getResource("excel/table.xlsx").getPath();
+        List<Object[]> objects = importExcel(fileName);
+
+        Joiner joiner = Joiner.on(",")
+                // 排除null值
+                .skipNulls();
+
+        String collect = objects.stream()
+                .map(r -> "T1." + r[0])
+                .collect(Collectors.joining(","));
+
+        String collect2 = objects.subList(0, 5).stream()
+                .map(r -> "T1." + r[0] + " = " + "T2." + r[0])
+                .collect(Collectors.joining(","));
+
+        System.out.println("=================collect================");
+        System.out.println(collect);
+        System.out.println("=================collect2================");
+        System.out.println(collect2);
     }
 
 }
