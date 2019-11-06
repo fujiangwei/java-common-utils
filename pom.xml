@@ -135,13 +135,16 @@
                     <layout>ZIP</layout>
                     <!-- 指定该jar包启动时的主类[建议] -->
                     <mainClass>com.common.util.CommonUtilsApplication</mainClass>
-                    <includes>
-                        <!--依赖jar不打进项目jar包中-->
-                        <include>
-                            <groupId>nothing</groupId>
-                            <artifactId>nothing</artifactId>
-                        </include>
-                    </includes>
+                    <!--<includes>-->
+                        <!--&lt;!&ndash;依赖jar不打进项目jar包中&ndash;&gt;-->
+                        <!--<include>-->
+                            <!--<groupId>nothing</groupId>-->
+                            <!--<artifactId>nothing</artifactId>-->
+                        <!--</include>-->
+                    <!--</includes>-->
+                    <!--配置的 classifier 表示可执行 jar 的名字，配置了这个之后，在插件执行 repackage 命令时，
+                    就不会给 mvn package 所打成的 jar 重命名了,这样就可以被其他项目引用了，classifier命名的为可执行jar-->
+                    <classifier>myexec</classifier>
                 </configuration>
                 <executions>
                     <execution>
