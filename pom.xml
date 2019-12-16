@@ -120,8 +120,12 @@
             <artifactId>javax.mail-api</artifactId>
             <version>1.6.2</version>
         </dependency>
-
-
+        <!-- https://mvnrepository.com/artifact/com.github.albfernandez/javadbf -->
+        <dependency>
+            <groupId>com.github.albfernandez</groupId>
+            <artifactId>javadbf</artifactId>
+            <version>1.10.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -144,7 +148,7 @@
                     <!--</includes>-->
                     <!--配置的 classifier 表示可执行 jar 的名字，配置了这个之后，在插件执行 repackage 命令时，
                     就不会给 mvn package 所打成的 jar 重命名了,这样就可以被其他项目引用了，classifier命名的为可执行jar-->
-                    <classifier>myexec</classifier>
+                    <!--<classifier>myexec</classifier>-->
                 </configuration>
                 <executions>
                     <execution>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="GB2312"?>
+<?xml-stylesheet type="text/xsl" href="test.xsl"?>
+<根元素 xmlns="http://www.bromon.org" xmlns:other="http://www.w3c.org">
+    <元素一 xmlns="" 属性="属性一">
+        元素值
+        <元素二>第二个元素</元素二>
+    </元素一>
+    <元素三 xmlns="">第三个元素</元素三>
+</根元素>
+
