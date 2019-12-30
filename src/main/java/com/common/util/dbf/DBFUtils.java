@@ -166,4 +166,12 @@ public class DBFUtils {
             System.out.println("total : " + (System.currentTimeMillis() - start));
         }
     }
+
+    public static boolean isDBF(String fileName) {
+        if (fileName.endsWith(".dbf")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
