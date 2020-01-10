@@ -266,13 +266,13 @@ public class ExcelUtil {
         //右边框
         style.setBorderRight(BorderStyle.SLANTED_DASH_DOT);
         //上边框颜色
-        style.setTopBorderColor(HSSFColor.HSSFColorPredefined.RED.getIndex());
+        style.setTopBorderColor(HSSFColor.RED.index);
         //下边框颜色
-        style.setBottomBorderColor(HSSFColor.HSSFColorPredefined.BLUE.getIndex());
+        style.setBottomBorderColor(HSSFColor.BLUE.index);
         //左边框颜色
-        style.setLeftBorderColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
+        style.setLeftBorderColor(HSSFColor.GREEN.index);
         //右边框颜色
-        style.setRightBorderColor(HSSFColor.HSSFColorPredefined.PINK.getIndex());
+        style.setRightBorderColor(HSSFColor.PINK.index);
         cell131.setCellStyle(style);
 
         /****8、设置字体******/
@@ -285,7 +285,7 @@ public class ExcelUtil {
         //设置字号
         font.setFontHeightInPoints((short)28);
         //设置字体颜色
-        font.setColor(HSSFColor.HSSFColorPredefined.RED.getIndex());
+        font.setColor(HSSFColor.RED.index);
         //设置下划线
         font.setUnderline(FontFormatting.U_SINGLE);
         //设置上标下标
@@ -405,7 +405,8 @@ public class ExcelUtil {
 
         String fileName = Thread.currentThread().getContextClassLoader().getResource("excel/table.xlsx").getPath();
 
-        File file = new File(fileName);
+        String path22 = "X:/20200102/GBXX_20200102.xlsx";
+        File file = new File(path22);
         importExcel(file);
         System.out.println("123");
     }

@@ -256,16 +256,16 @@ public class ExportExcelUtils {
                 Object[] objects = new Object[row.getPhysicalNumberOfCells()];
                 int index = 0;
                 for (Cell cell : row) {
-                    if (cell.getCellType().equals(CellType.NUMERIC)) {
+                    if (cell.getCellType() == CellType.NUMERIC.getCode()) {
                         objects[index] = (int) cell.getNumericCellValue();
                     }
-                    if (cell.getCellType().equals(CellType.STRING)) {
+                    if (cell.getCellType() == CellType.STRING.getCode()) {
                         objects[index] = cell.getStringCellValue();
                     }
-                    if (cell.getCellType().equals(CellType.BOOLEAN)) {
+                    if (cell.getCellType() == CellType.BOOLEAN.getCode()) {
                         objects[index] = cell.getBooleanCellValue();
                     }
-                    if (cell.getCellType().equals(CellType.ERROR)) {
+                    if (cell.getCellType() == CellType.ERROR.getCode()) {
                         objects[index] = cell.getErrorCellValue();
                     }
                     index++;
