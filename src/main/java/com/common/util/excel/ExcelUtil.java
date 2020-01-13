@@ -1,5 +1,6 @@
 package com.common.util.excel;
 
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hpsf.DocumentSummaryInformation;
 import org.apache.poi.hpsf.SummaryInformation;
@@ -14,6 +15,7 @@ import org.springframework.util.Assert;
 
 import java.io.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 文件描述
@@ -21,7 +23,12 @@ import java.util.Date;
 @Slf4j(topic = "ExcelUtil")
 public class ExcelUtil {
 
-    public static void importExcel(File file) {
+    /**
+     * 导入
+     * @param file
+     */
+    public static List<List<Object>> importExcel(File file) {
+        List<List<Object>> importData = Lists.newArrayList();
         Workbook workbook = null;
         try {
             workbook = getWorkbook(file);
@@ -30,12 +37,67 @@ public class ExcelUtil {
             for (int i = 0; i < sheet.getLastRowNum(); i ++) {
                 //获取索引为i的行，以0开始
                 Row row = sheet.getRow(i);
-                System.out.println(row.getCell(0).getStringCellValue());
+                List<Object> curRowData = Lists.newArrayList();
+                for (int j = 0; j < 53; j ++) {
+                    Cell cell = row.getCell(j);
+                    //此处cell不判空会出现读取不到空cell的列值，此处默认处理为空字符串
+                    if (null == cell) {
+                        curRowData.add("");
+                    } else {
+                        curRowData.add(cell.getStringCellValue());
+                    }
+                }
+
+                importData.add(curRowData);
             }
         } catch (Exception e) {
             log.error("importExcel fail,{}", e);
         } finally {
             close(workbook);
+        }
+
+        System.out.println(importData);
+
+        return importData;
+    }
+
+    /**
+     * 导出
+     * @param exportFilePath
+     */
+    public static void exportExcel(String exportFilePath, List<List<Object>> exportData) {
+        try {
+            File exportFile = new File(exportFilePath);
+            // 创建Excel文件(Workbook)
+            Workbook workbook = null;
+            if(isExcel2003(exportFilePath)) {
+                workbook = new HSSFWorkbook();
+            } else {
+                workbook = new XSSFWorkbook();
+            }
+
+            FileOutputStream out = new FileOutputStream(exportFile);
+
+            //创建工作表(Sheet)
+            Sheet sheet = workbook.createSheet();
+
+            // 创建行,从0开始
+            List<Object> curRowData = exportData.get(0);
+            for (int i = 0; i < curRowData.size(); i ++) {
+                Row row = sheet.createRow(i);
+                // 创建行的单元格,也是从0开始
+                for (int j = 0; j < exportData.size(); j ++) {
+                    Cell cell = row.createCell(j);
+                    cell.setCellValue(String.valueOf(exportData.get(j).get(i)));
+                }
+            }
+
+            workbook.write(out);
+            out.flush();
+            close(workbook);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -399,15 +461,16 @@ public class ExcelUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        String path = Thread.currentThread().getContextClassLoader().getResource(".").getPath();
-//        excelTest(path + "user.xls");
-//        docTest(path + "user.doc");
-
         String fileName = Thread.currentThread().getContextClassLoader().getResource("excel/table.xlsx").getPath();
 
-        String path22 = "X:/20200102/GBXX_20200102.xlsx";
+        String path22 = "D:\\workspace\\2019\\java-common-utils\\fields.xlsx";
         File file = new File(path22);
-        importExcel(file);
-        System.out.println("123");
+        List<List<Object>> importData = importExcel(file);
+
+//        String path = Thread.currentThread().getContextClassLoader().getResource(".").getPath();
+//        excelTest(path + "user.xls");
+//        docTest(path + "user.doc");
+        String path = "D:\\workspace\\2019\\java-common-utils\\";
+        exportExcel(path + "field.xlsx", importData);
     }
 }
