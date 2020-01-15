@@ -1,5 +1,6 @@
 package com.common.util.excel;
 
+import com.google.common.collect.Lists;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.BuiltinFormats;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -73,6 +74,11 @@ public class ExcelXlsxReaderWithDefaultHandler extends DefaultHandler {
 	private List<String> cellList = new ArrayList<String>();
 
 	/**
+	 * 返回结果集
+	 */
+	private List<List<String>> result;
+
+	/**
 	 * 判断整行是否为空行的标记
 	 */
 	private boolean flag = false;
@@ -136,6 +142,10 @@ public class ExcelXlsxReaderWithDefaultHandler extends DefaultHandler {
 	 * 单元格
 	 */
 	private StylesTable stylesTable;
+
+	public ExcelXlsxReaderWithDefaultHandler(List<List<String>> result) {
+		this.result = result;
+	}
 
 	/**
 	 * 遍历工作簿中所有的电子表格
@@ -320,6 +330,13 @@ public class ExcelXlsxReaderWithDefaultHandler extends DefaultHandler {
 						curCol++;
 					}
 				}
+
+				List<String> cellListTmp = Lists.newArrayList();
+				for (int i = 0; i < cellList.size(); i ++) {
+					cellListTmp.add(cellList.get(i));
+				}
+				result.add(cellListTmp);
+				List<String> cellListTmp2 = cellList;
 
 				if (flag&&curRow!=1){ //该行不为空行且该行不是第一行，则发送（第一行为列名，不需要）
 					ExcelReaderUtil.sendRows(filePath, sheetName, sheetIndex, curRow, cellList);

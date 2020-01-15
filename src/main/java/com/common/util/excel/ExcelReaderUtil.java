@@ -1,5 +1,7 @@
 package com.common.util.excel;
 
+import com.google.common.collect.Lists;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -40,18 +42,21 @@ public class ExcelReaderUtil {
 			System.out.println(oneLine);
 	}
 
-	public static void readExcel(String fileName) throws Exception {
+	public static List<List<String>> readExcel(String fileName) throws Exception {
+		List<List<String>> result = Lists.newArrayList();
 		int totalRows =0;
 		if (fileName.endsWith(EXCEL03_EXTENSION)) { //处理excel2003文件
 			ExcelXlsReader excelXls=new ExcelXlsReader();
 			totalRows =excelXls.process(fileName);
 		} else if (fileName.endsWith(EXCEL07_EXTENSION)) {//处理excel2007文件
-			ExcelXlsxReaderWithDefaultHandler excelXlsxReader = new ExcelXlsxReaderWithDefaultHandler();
+			ExcelXlsxReaderWithDefaultHandler excelXlsxReader = new ExcelXlsxReaderWithDefaultHandler(result);
 			totalRows = excelXlsxReader.process(fileName);
 		} else {
 			throw new Exception("文件格式错误，fileName的扩展名只能是xls或xlsx。");
 		}
 		System.out.println("发送的总行数：" + totalRows);
+
+		return result;
 	}
 
 	public static void copyToTemp(File file, String tmpDir) throws Exception{
@@ -74,8 +79,8 @@ public class ExcelReaderUtil {
 		//String path="D:\\Github\\test.xls";
 		//String path="D:\\H3CIDEA\\POIExcel\\test.xlsx";
 //		String path="X:/20200106/ZQLL_20200106.xlsx";
-//		String path="X:/20200114/GBXX_20200114.xlsx";
-		String path="C:/Users/hspcadmin/Desktop/GBXX_20200114.xlsx";
+		String path="X:/20200114/GBXX_20200114.xlsx";
+//		String path="C:/Users/hspcadmin/Desktop/GBXX_20200114.xlsx";
 
 		/*ExcelReaderUtil.readExcel(file2.getAbsolutePath(),"/home/test/tmp.xlsx");*/
 		ExcelReaderUtil.readExcel(path);
