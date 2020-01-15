@@ -100,6 +100,11 @@ public class ExcelXlsxReaderWithDefaultHandler extends DefaultHandler {
 	private boolean charactersFlag = false;
 
 	/**
+	 * 判断单元格cell的c标签下是否有v，否则可能数据错位
+	 */
+	private boolean hasV = false;
+
+	/**
 	 * 异常信息，如果为空则表示没有异常
 	 */
 	private String exceptionMessage;
@@ -244,6 +249,22 @@ public class ExcelXlsxReaderWithDefaultHandler extends DefaultHandler {
 		if (isTElement) {//这个程序没经过
 			//将单元格内容加入rowlist中，在这之前先去掉字符串前后的空白符
 			String value = lastIndex.trim();
+
+			//补全单元格之间的空单元格
+			if (!ref.equals(preRef)) {
+				int len = countNullCell(ref, preRef);
+				for (int i = 0; i < len; i++) {
+					cellList.add(curCol, "");
+					curCol++;
+				}
+			} else if (ref.equals(preRef) && !ref.startsWith("A")){ //ref等于preRef，且以B或者C...开头，表明首部为空格
+				int len = countNullCell(ref, "A");
+				for (int i = 0; i <= len; i++) {
+					cellList.add(curCol, "");
+					curCol++;
+				}
+			}
+
 			cellList.add(curCol, value);
 			endElementFlag = true;
 			curCol++;
@@ -253,6 +274,7 @@ public class ExcelXlsxReaderWithDefaultHandler extends DefaultHandler {
 				flag = true;
 			}
 		} else if ("v".equals(name)) {
+			hasV = true;
 			//v => 单元格的值，如果单元格是字符串，则v标签的值为该字符串在SST中的索引
 			String value = this.getDataValue(lastIndex.trim(), "");//根据索引值获取对应的单元格值
 

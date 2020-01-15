@@ -26,7 +26,7 @@ public class ExcelReaderUtil {
 //			oneLineSb.append("sheet" + sheetIndex);
 //			oneLineSb.append("::" + sheetName);//加上sheet名
 //			oneLineSb.append("--");
-			oneLineSb.append("row" + curRow);
+			oneLineSb.append("row" + curRow + "-" + cellList.size());
 			oneLineSb.append("::");
 			for (String cell : cellList) {
 				oneLineSb.append(cell.trim());
@@ -74,8 +74,8 @@ public class ExcelReaderUtil {
 		//String path="D:\\Github\\test.xls";
 		//String path="D:\\H3CIDEA\\POIExcel\\test.xlsx";
 //		String path="X:/20200106/ZQLL_20200106.xlsx";
-		String path="X:/20200106/GBXX_20200106_2.xls";
-//		String path="C:/Users/hspcadmin/Desktop/GBXX_20200106.xlsx";
+//		String path="X:/20200114/GBXX_20200114.xlsx";
+		String path="C:/Users/hspcadmin/Desktop/GBXX_20200114.xlsx";
 
 		/*ExcelReaderUtil.readExcel(file2.getAbsolutePath(),"/home/test/tmp.xlsx");*/
 		ExcelReaderUtil.readExcel(path);
