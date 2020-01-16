@@ -282,7 +282,7 @@ public class Pinyin4jUtil {
      * @param args 
      */  
     public static void main(String[] args) {  
-        String str = "万行";
+        String str = "dg万行";
         System.out.println("小写输出：" + getPinyinToLowerCase(str));  
         System.out.println("大写输出：" + getPinyinToUpperCase(str));  
         System.out.println("首字母大写输出：" + getPinyinFirstToUpperCase(str));  
