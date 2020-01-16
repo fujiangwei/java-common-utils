@@ -1,6 +1,7 @@
 package com.common.util.excel;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -80,7 +81,10 @@ public class ExcelReaderUtil {
 		String path="D:\\H3CIDEA\\POIExcel\\test.xlsx";
 
 		/*ExcelReaderUtil.readExcel(file2.getAbsolutePath(),"/home/test/tmp.xlsx");*/
-		ExcelReaderUtil.readExcel(path);
+//		ExcelReaderUtil.readExcel(path);
 		/*readXlsx(file2.getAbsolutePath());*/
+		System.out.println(StringUtils.contains("aaaa", "g"));
+		System.out.println(StringUtils.contains("aaga", "g"));
+		System.out.println(StringUtils.contains("gaga", "g"));
 	}
 }

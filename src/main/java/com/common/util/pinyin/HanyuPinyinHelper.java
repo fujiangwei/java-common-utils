@@ -126,6 +126,6 @@ public class HanyuPinyinHelper {
 
     public static void main(String[] args) {
         HanyuPinyinHelper hanyuPinyinHelper = new HanyuPinyinHelper() ;
-        System.out.println(hanyuPinyinHelper.toHanyuPinyin("深康佳A"));
+        System.out.println(HanyuPinyinHelper.getFirstLetters("万科A", HanyuPinyinCaseType.LOWERCASE));
     }
 }
