@@ -40,11 +40,11 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>1.3.2</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>commons-io</groupId>-->
+        <!--<artifactId>commons-io</artifactId>-->
+        <!--<version>1.3.2</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -108,10 +108,10 @@
             <version>3.17</version>
         </dependency>
         <dependency>
-             <groupId>org.apache.poi</groupId>
-             <artifactId>poi-ooxml-schemas</artifactId>
-             <version>3.17</version>
-       </dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>3.17</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->
         <dependency>
             <groupId>xerces</groupId>
@@ -147,6 +147,23 @@
             <artifactId>pinyin4j</artifactId>
             <version>2.5.0</version>
         </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/jcifs/jcifs -->
+        <dependency>
+            <groupId>jcifs</groupId>
+            <artifactId>jcifs</artifactId>
+            <version>1.3.17</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/ch.ethz.ganymed/ganymed-ssh2 -->
+        <dependency>
+            <groupId>ch.ethz.ganymed</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
+            <version>262</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -161,11 +178,11 @@
                     <!-- 指定该jar包启动时的主类[建议] -->
                     <mainClass>com.common.util.CommonUtilsApplication</mainClass>
                     <!--<includes>-->
-                        <!--&lt;!&ndash;依赖jar不打进项目jar包中&ndash;&gt;-->
-                        <!--<include>-->
-                            <!--<groupId>nothing</groupId>-->
-                            <!--<artifactId>nothing</artifactId>-->
-                        <!--</include>-->
+                    <!--&lt;!&ndash;依赖jar不打进项目jar包中&ndash;&gt;-->
+                    <!--<include>-->
+                    <!--<groupId>nothing</groupId>-->
+                    <!--<artifactId>nothing</artifactId>-->
+                    <!--</include>-->
                     <!--</includes>-->
                     <!--配置的 classifier 表示可执行 jar 的名字，配置了这个之后，在插件执行 repackage 命令时，
                     就不会给 mvn package 所打成的 jar 重命名了,这样就可以被其他项目引用了，classifier命名的为可执行jar-->
@@ -211,19 +228,19 @@
                 </executions>
             </plugin>
             <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-jar-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<archive>-->
-                        <!--<manifest>-->
-                            <!--&lt;!&ndash;addClasspath表示需要加入到类构建路径&ndash;&gt;-->
-                            <!--<addClasspath>true</addClasspath>-->
-                            <!--&lt;!&ndash;classpathPrefix指定生成的Manifest文件中Class-Path依赖lib前面都加上路径,构建出lib/xx.jar&ndash;&gt;-->
-                            <!--<classpathPrefix>lib/</classpathPrefix>-->
-                            <!--<mainClass>com.common.util.CommonUtilsApplication</mainClass>-->
-                        <!--</manifest>-->
-                    <!--</archive>-->
-                <!--</configuration>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-jar-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<archive>-->
+            <!--<manifest>-->
+            <!--&lt;!&ndash;addClasspath表示需要加入到类构建路径&ndash;&gt;-->
+            <!--<addClasspath>true</addClasspath>-->
+            <!--&lt;!&ndash;classpathPrefix指定生成的Manifest文件中Class-Path依赖lib前面都加上路径,构建出lib/xx.jar&ndash;&gt;-->
+            <!--<classpathPrefix>lib/</classpathPrefix>-->
+            <!--<mainClass>com.common.util.CommonUtilsApplication</mainClass>-->
+            <!--</manifest>-->
+            <!--</archive>-->
+            <!--</configuration>-->
             <!--</plugin>-->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

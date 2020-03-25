@@ -1,16 +1,14 @@
 package com.common.util.dbf;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.common.util.file.ReadRemoteFile;
 import com.linuxense.javadbf.*;
+import jcifs.smb.SmbFile;
 
 import java.io.*;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
 
 /**
  * 文件描述 dbf文件工具
@@ -121,7 +119,9 @@ public class DBFUtils {
         DBFReader reader = null;
         InputStream in;
         try {
-            in = new FileInputStream(new File(filePath));
+            SmbFile smbFile = ReadRemoteFile.smbFileGet(filePath);
+//            in = new FileInputStream(new File(filePath));
+            in = smbFile.getInputStream();
             //将文件从文件流中读入。
             reader = new DBFReader(in);
             Object[] rowObjects = null;
@@ -161,6 +161,8 @@ public class DBFUtils {
         } catch (DBFException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             System.out.println("total : " + (System.currentTimeMillis() - start));

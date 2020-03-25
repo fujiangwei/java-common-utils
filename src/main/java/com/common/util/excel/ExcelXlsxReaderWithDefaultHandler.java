@@ -1,6 +1,9 @@
 package com.common.util.excel;
 
+import com.common.util.file.ReadRemoteFile;
 import com.google.common.collect.Lists;
+import jcifs.smb.SmbFile;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.BuiltinFormats;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -9,6 +12,8 @@ import org.apache.poi.xssf.model.SharedStringsTable;
 import org.apache.poi.xssf.model.StylesTable;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -30,6 +35,8 @@ import java.util.List;
  * 用于解决.xlsx2007版本大数据量问题
  **/
 public class ExcelXlsxReaderWithDefaultHandler extends DefaultHandler {
+
+	private static Logger log = LoggerFactory.getLogger(ExcelXlsxReaderWithDefaultHandler.class);
 
 	/**
 	 * 单元格中的数据可能的数据类型
@@ -154,9 +161,32 @@ public class ExcelXlsxReaderWithDefaultHandler extends DefaultHandler {
 	 * @param filename
 	 * @throws Exception
 	 */
-	public int process(String filename) throws Exception {
+	public int process(String filename, String remoteMode) throws Exception {
 		filePath = filename;
-		OPCPackage pkg = OPCPackage.open(filename);
+
+		OPCPackage pkg = null;
+		if (StringUtils.equals("shared", remoteMode)) {
+			InputStream inputStream = null;
+			try {
+				SmbFile smbFile = ReadRemoteFile.smbFileGet(filePath);
+				if (null == smbFile) {
+					throw new IllegalArgumentException("smbFile is null");
+				}
+				inputStream = smbFile.getInputStream();
+
+				pkg = OPCPackage.open(inputStream);
+			} catch (Exception e) {
+				log.error("process 异常，", e);
+			} finally {
+				if (null != inputStream) {
+					inputStream.close();
+				}
+			}
+		} else {
+			//非samba协议访问
+			pkg = OPCPackage.open(filename);
+		}
+
 		XSSFReader xssfReader = new XSSFReader(pkg);
 		stylesTable = xssfReader.getStylesTable();
 		SharedStringsTable sst = xssfReader.getSharedStringsTable();

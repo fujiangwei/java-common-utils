@@ -43,15 +43,17 @@ public class ExcelReaderUtil {
 			System.out.println(oneLine);
 	}
 
-	public static List<List<String>> readExcel(String fileName) throws Exception {
+	public static List<List<String>> readExcel(String fileName, String remoteMode) throws Exception {
 		List<List<String>> result = Lists.newArrayList();
 		int totalRows =0;
-		if (fileName.endsWith(EXCEL03_EXTENSION)) { //处理excel2003文件
+		if (fileName.endsWith(EXCEL03_EXTENSION)) {
+			//处理excel2003文件
 			ExcelXlsReader excelXls=new ExcelXlsReader();
 			totalRows =excelXls.process(fileName);
-		} else if (fileName.endsWith(EXCEL07_EXTENSION)) {//处理excel2007文件
+		} else if (fileName.endsWith(EXCEL07_EXTENSION)) {
+			//处理excel2007文件
 			ExcelXlsxReaderWithDefaultHandler excelXlsxReader = new ExcelXlsxReaderWithDefaultHandler(result);
-			totalRows = excelXlsxReader.process(fileName);
+			totalRows = excelXlsxReader.process(fileName, remoteMode);
 		} else {
 			throw new Exception("文件格式错误，fileName的扩展名只能是xls或xlsx。");
 		}
@@ -78,13 +80,14 @@ public class ExcelReaderUtil {
 
 	public static void main(String[] args) throws Exception {
 		//String path="D:\\Github\\test.xls";
-		String path="D:\\H3CIDEA\\POIExcel\\test.xlsx";
+		String path="C:\\Users\\hspcadmin\\Desktop\\GBXX_20200120.xlsx";
 
 		/*ExcelReaderUtil.readExcel(file2.getAbsolutePath(),"/home/test/tmp.xlsx");*/
-//		ExcelReaderUtil.readExcel(path);
+		ExcelReaderUtil.readExcel(path, "shared");
 		/*readXlsx(file2.getAbsolutePath());*/
-		System.out.println(StringUtils.contains("aaaa", "g"));
-		System.out.println(StringUtils.contains("aaga", "g"));
-		System.out.println(StringUtils.contains("gaga", "g"));
+
+
+
+
 	}
 }

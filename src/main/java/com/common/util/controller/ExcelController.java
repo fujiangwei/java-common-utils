@@ -83,4 +83,13 @@ public class ExcelController {
 
         ExportExcelUtils.exportExcel(response,"hello.xlsx", data);
     }
+
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String excel() throws Exception {
+       return "hello world";
+    }
+
+    @RequestMapping(value = "/remote", method = RequestMethod.GET)
+    public void remoteTest() throws Exception {
+    }
 }

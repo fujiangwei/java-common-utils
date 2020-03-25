@@ -1,15 +1,14 @@
 package com.common.util.csv;
 
+import com.common.util.file.ReadRemoteFile;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import jcifs.smb.SmbFile;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * 文件描述 .csv文件工具
@@ -26,10 +25,15 @@ public class CSVUtils {
         String charset = "GBK";
         CSVReader csvReader = null;
         try {
+//            csvReader = new CSVReaderBuilder(
+//                    new BufferedReader(
+//                            new InputStreamReader(
+//                                    new FileInputStream(new File(path)), charset))).build();
+            SmbFile smbFile = ReadRemoteFile.smbFileGet(path);
             csvReader = new CSVReaderBuilder(
                     new BufferedReader(
                             new InputStreamReader(
-                                    new FileInputStream(new File(path)), charset))).build();
+                                    smbFile.getInputStream() , charset))).build();
 //            List<String[]> all = csvReader.readAll();
 //            System.out.println("all size " + all.size());
 //            StringBuilder headerSb = new StringBuilder();
