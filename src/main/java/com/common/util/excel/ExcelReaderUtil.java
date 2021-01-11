@@ -80,10 +80,12 @@ public class ExcelReaderUtil {
 
 	public static void main(String[] args) throws Exception {
 		//String path="D:\\Github\\test.xls";
-		String path="C:\\Users\\hspcadmin\\Desktop\\GBXX_20200120.xlsx";
+		String path="C:\\Users\\hspcadmin\\Desktop\\GBXX_20191216.xls";
+
+//        String path="C:\\Users\\hspcadmin\\Desktop\\ZZZS_20200326.xls";
 
 		/*ExcelReaderUtil.readExcel(file2.getAbsolutePath(),"/home/test/tmp.xlsx");*/
-		ExcelReaderUtil.readExcel(path, "shared");
+		ExcelReaderUtil.readExcel(path, "shared2");
 		/*readXlsx(file2.getAbsolutePath());*/
 
 

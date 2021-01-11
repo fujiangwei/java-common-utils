@@ -164,38 +164,51 @@
             <artifactId>ganymed-ssh2</artifactId>
             <version>262</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sourceforge.jexcelapi/jxl -->
+        <dependency>
+            <groupId>net.sourceforge.jexcelapi</groupId>
+            <artifactId>jxl</artifactId>
+            <version>2.6.12</version>
+        </dependency>
+
+        <!--excel操作-->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-spring-boot-starter</artifactId>
+            <version>3.3.0</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <finalName>common</finalName>
+        <finalName>common-demo</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <!--使用-Dloader.path需要在打包的时候增加<layout>ZIP</layout>，不指定的话-Dloader.path不生效-->
-                    <layout>ZIP</layout>
-                    <!-- 指定该jar包启动时的主类[建议] -->
-                    <mainClass>com.common.util.CommonUtilsApplication</mainClass>
-                    <!--<includes>-->
-                    <!--&lt;!&ndash;依赖jar不打进项目jar包中&ndash;&gt;-->
-                    <!--<include>-->
-                    <!--<groupId>nothing</groupId>-->
-                    <!--<artifactId>nothing</artifactId>-->
-                    <!--</include>-->
-                    <!--</includes>-->
-                    <!--配置的 classifier 表示可执行 jar 的名字，配置了这个之后，在插件执行 repackage 命令时，
-                    就不会给 mvn package 所打成的 jar 重命名了,这样就可以被其他项目引用了，classifier命名的为可执行jar-->
-                    <!--<classifier>myexec</classifier>-->
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--&lt;!&ndash;使用-Dloader.path需要在打包的时候增加<layout>ZIP</layout>，不指定的话-Dloader.path不生效&ndash;&gt;-->
+                    <!--<layout>ZIP</layout>-->
+                    <!--&lt;!&ndash; 指定该jar包启动时的主类[建议] &ndash;&gt;-->
+                    <!--<mainClass>com.common.util.CommonUtilsApplication</mainClass>-->
+                    <!--&lt;!&ndash;<includes>&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;依赖jar不打进项目jar包中&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;<include>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<groupId>nothing</groupId>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<artifactId>nothing</artifactId>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</include>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</includes>&ndash;&gt;-->
+                    <!--&lt;!&ndash;配置的 classifier 表示可执行 jar 的名字，配置了这个之后，在插件执行 repackage 命令时，-->
+                    <!--就不会给 mvn package 所打成的 jar 重命名了,这样就可以被其他项目引用了，classifier命名的为可执行jar&ndash;&gt;-->
+                    <!--&lt;!&ndash;<classifier>myexec</classifier>&ndash;&gt;-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>repackage</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -223,25 +236,31 @@
                             <outputDirectory>
                                 ${project.build.directory}/lib
                             </outputDirectory>
+                            <!--覆盖发布工件-->
+                            <overWriteReleases>false</overWriteReleases>
+                            <!--覆盖快照工件-->
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <!--如果更新，则覆盖-->
+                            <overWriteIfNewer>true</overWriteIfNewer>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>-->
-            <!--<groupId>org.apache.maven.plugins</groupId>-->
-            <!--<artifactId>maven-jar-plugin</artifactId>-->
-            <!--<configuration>-->
-            <!--<archive>-->
-            <!--<manifest>-->
-            <!--&lt;!&ndash;addClasspath表示需要加入到类构建路径&ndash;&gt;-->
-            <!--<addClasspath>true</addClasspath>-->
-            <!--&lt;!&ndash;classpathPrefix指定生成的Manifest文件中Class-Path依赖lib前面都加上路径,构建出lib/xx.jar&ndash;&gt;-->
-            <!--<classpathPrefix>lib/</classpathPrefix>-->
-            <!--<mainClass>com.common.util.CommonUtilsApplication</mainClass>-->
-            <!--</manifest>-->
-            <!--</archive>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!--addClasspath表示需要加入到类构建路径-->
+                            <addClasspath>true</addClasspath>
+                            <!--classpathPrefix指定生成的Manifest文件中Class-Path依赖lib前面都加上路径,构建出lib/xx.jar-->
+                            <classpathPrefix>../fbase/shared/</classpathPrefix>
+                            <mainClass>com.common.util.CommonUtilsApplication</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>${plugin.assembly.version}</version>

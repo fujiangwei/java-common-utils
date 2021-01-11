@@ -91,5 +91,6 @@ public class ExcelController {
 
     @RequestMapping(value = "/remote", method = RequestMethod.GET)
     public void remoteTest() throws Exception {
+        System.out.println("/remote");
     }
 }
