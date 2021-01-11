@@ -23,8 +23,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @Description: Export excel utils
+ * @author
+ * @date
+ */
 @Slf4j(topic = "ExportExcelUtils")
 public class ExportExcelUtils {
+    /**
+     * Export excel
+     *
+     * @param response response
+     * @param fileName file name
+     * @param data     data
+     * @throws Exception exception
+     * @author: hundsun
+     * @date: 2020 /11/1 11:10
+     */
     public static void exportExcel(HttpServletResponse response, String fileName, ExcelData data) throws Exception {
         // 告诉浏览器用什么软件可以打开此文件
         response.setHeader("content-Type", "application/vnd.ms-excel");
@@ -33,6 +48,15 @@ public class ExportExcelUtils {
         exportExcel(data, response.getOutputStream());
     }
 
+    /**
+     * Export excel
+     *
+     * @param data data
+     * @param out  out
+     * @throws Exception exception
+     * @author: hundsun
+     * @date: 2020 /11/1 11:10
+     */
     public static void exportExcel(ExcelData data, OutputStream out) throws Exception {
 
         XSSFWorkbook wb = new XSSFWorkbook();
@@ -50,6 +74,15 @@ public class ExportExcelUtils {
         }
     }
 
+    /**
+     * Write excel
+     *
+     * @param wb    wb
+     * @param sheet sheet
+     * @param data  data
+     * @author: hundsun
+     * @date: 2020 /11/1 11:10
+     */
     private static void writeExcel(XSSFWorkbook wb, Sheet sheet, ExcelData data) {
 
         int rowIndex = 0;
@@ -60,6 +93,16 @@ public class ExportExcelUtils {
 
     }
 
+    /**
+     * Write titles to excel
+     *
+     * @param wb     wb
+     * @param sheet  sheet
+     * @param titles titles
+     * @return the int
+     * @author: hundsun
+     * @date: 2020 /11/1 11:10
+     */
     private static int writeTitlesToExcel(XSSFWorkbook wb, Sheet sheet, List<String> titles) {
         int rowIndex = 0;
         int colIndex = 0;
@@ -93,6 +136,17 @@ public class ExportExcelUtils {
         return rowIndex;
     }
 
+    /**
+     * Write rows to excel
+     *
+     * @param wb       wb
+     * @param sheet    sheet
+     * @param rows     rows
+     * @param rowIndex row index
+     * @return the int
+     * @author: hundsun
+     * @date: 2020 /11/1 11:10
+     */
     private static int writeRowsToExcel(XSSFWorkbook wb, Sheet sheet, List<List<Object>> rows, int rowIndex) {
         int colIndex = 0;
 
@@ -128,6 +182,14 @@ public class ExportExcelUtils {
         return rowIndex;
     }
 
+    /**
+     * Auto size columns
+     *
+     * @param sheet        sheet
+     * @param columnNumber column number
+     * @author: hundsun
+     * @date: 2020 /11/1 11:10
+     */
     private static void autoSizeColumns(Sheet sheet, int columnNumber) {
 
         for (int i = 0; i < columnNumber; i++) {
@@ -142,6 +204,13 @@ public class ExportExcelUtils {
         }
     }
 
+    /**
+     * Sets border *
+     *
+     * @param style  style
+     * @param border border
+     * @param color  color
+     */
     private static void setBorder(XSSFCellStyle style, BorderStyle border, XSSFColor color) {
         style.setBorderTop(border);
         style.setBorderLeft(border);
@@ -153,6 +222,14 @@ public class ExportExcelUtils {
         style.setBorderColor(XSSFCellBorder.BorderSide.BOTTOM, color);
     }
 
+    /**
+     * Export excel
+     *
+     * @param response response
+     * @param data     data
+     * @author: hundsun
+     * @date: 2020 /11/1 11:10
+     */
     public static void exportExcel(HttpServletResponse response, ExcelData data) {
         log.info("导出解析开始，fileName:{}",data.getFileName());
         try {
@@ -174,6 +251,13 @@ public class ExportExcelUtils {
         }
     }
 
+    /**
+     * Sets title *
+     *
+     * @param workbook workbook
+     * @param sheet    sheet
+     * @param str      str
+     */
     private static void setTitle(HSSFWorkbook workbook, HSSFSheet sheet, String[] str) {
         try {
             HSSFRow row = sheet.createRow(0);
@@ -200,6 +284,12 @@ public class ExportExcelUtils {
         }
     }
 
+    /**
+     * Sets data *
+     *
+     * @param sheet sheet
+     * @param data  data
+     */
     private static void setData(HSSFSheet sheet, List<List<Object>> data) {
         try{
             int rowNum = 1;
@@ -217,6 +307,13 @@ public class ExportExcelUtils {
         }
     }
 
+    /**
+     * Sets browser *
+     *
+     * @param response response
+     * @param workbook workbook
+     * @param fileName file name
+     */
     private static void setBrowser(HttpServletResponse response, HSSFWorkbook workbook, String fileName) {
         try {
             //清空response
@@ -237,6 +334,14 @@ public class ExportExcelUtils {
 
     }
 
+    /**
+     * Import excel
+     *
+     * @param fileName file name
+     * @return the list
+     * @author: hundsun
+     * @date: 2020 /11/1 11:10
+     */
     public static List<Object[]> importExcel(String fileName) {
         log.info("导入解析开始，fileName:{}",fileName);
         try {
@@ -256,16 +361,16 @@ public class ExportExcelUtils {
                 Object[] objects = new Object[row.getPhysicalNumberOfCells()];
                 int index = 0;
                 for (Cell cell : row) {
-                    if (cell.getCellType() == CellType.NUMERIC.getCode()) {
+                    if (cell.getCellType().getCode() == CellType.NUMERIC.getCode()) {
                         objects[index] = (int) cell.getNumericCellValue();
                     }
-                    if (cell.getCellType() == CellType.STRING.getCode()) {
+                    if (cell.getCellType().getCode() == CellType.STRING.getCode()) {
                         objects[index] = cell.getStringCellValue();
                     }
-                    if (cell.getCellType() == CellType.BOOLEAN.getCode()) {
+                    if (cell.getCellType().getCode() == CellType.BOOLEAN.getCode()) {
                         objects[index] = cell.getBooleanCellValue();
                     }
-                    if (cell.getCellType() == CellType.ERROR.getCode()) {
+                    if (cell.getCellType().getCode() == CellType.ERROR.getCode()) {
                         objects[index] = cell.getErrorCellValue();
                     }
                     index++;
@@ -281,6 +386,9 @@ public class ExportExcelUtils {
         return null;
     }
 
+    /**
+     * @param args args
+     */
     public static void main(String[] args) {
         String fileName = Thread.currentThread().getContextClassLoader().getResource("excel/table.xlsx").getPath();
         List<Object[]> objects = importExcel(fileName);

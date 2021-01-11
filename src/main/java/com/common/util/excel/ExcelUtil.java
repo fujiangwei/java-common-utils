@@ -328,13 +328,13 @@ public class ExcelUtil {
         //右边框
         style.setBorderRight(BorderStyle.SLANTED_DASH_DOT);
         //上边框颜色
-        style.setTopBorderColor(HSSFColor.RED.index);
+        style.setTopBorderColor(HSSFColor.HSSFColorPredefined.RED.getIndex());
         //下边框颜色
-        style.setBottomBorderColor(HSSFColor.BLUE.index);
+        style.setBottomBorderColor(HSSFColor.HSSFColorPredefined.BLUE.getIndex());
         //左边框颜色
-        style.setLeftBorderColor(HSSFColor.GREEN.index);
+        style.setLeftBorderColor(HSSFColor.HSSFColorPredefined.GREEN.getIndex());
         //右边框颜色
-        style.setRightBorderColor(HSSFColor.PINK.index);
+        style.setRightBorderColor(HSSFColor.HSSFColorPredefined.PINK.getIndex());
         cell131.setCellStyle(style);
 
         /****8、设置字体******/
@@ -347,7 +347,7 @@ public class ExcelUtil {
         //设置字号
         font.setFontHeightInPoints((short)28);
         //设置字体颜色
-        font.setColor(HSSFColor.RED.index);
+        font.setColor(HSSFColor.HSSFColorPredefined.RED.getIndex());
         //设置下划线
         font.setUnderline(FontFormatting.U_SINGLE);
         //设置上标下标
