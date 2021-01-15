@@ -187,6 +187,12 @@
             <artifactId>commons-csv</artifactId>
             <version>1.7</version>
         </dependency>
+        <!--shiro-core-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.4.2</version>
+        </dependency>
     </dependencies>
 
     <build>
