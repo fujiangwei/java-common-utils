@@ -1,6 +1,6 @@
-package com.common.util.tj.aspect;
+package com.common.util.count.aspect;
 
-import com.common.util.tj.annotation.AnnDemo;
+import com.common.util.count.annotation.AnnDemo;
 import org.apache.commons.collections.CollectionUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -25,11 +25,11 @@ import java.util.Objects;
 @Aspect
 @Component
 public class AspectDemo {
-    @Pointcut(value = "execution(* com.common.util.tj.controller..*(..))")
+    @Pointcut(value = "execution(* com.common.util.count.controller..*(..))")
     public void excetionMethod() {
     }
 
-    @Pointcut(value = "execution(* com.common.util.tj.controller..*(..)) && @annotation(com.common.util.tj.annotation.AnnDemo)")
+    @Pointcut(value = "execution(* com.common.util.count.controller..*(..)) && @annotation(com.common.util.count.annotation.AnnDemo)")
     public void excetionNote() {
     }
 
@@ -41,7 +41,7 @@ public class AspectDemo {
         }
     }
 
-    @Around(value = "execution(* com.common.util.tj.controller..*(..)) && @annotation(com.common.util.tj.annotation.AnnDemo)")
+    @Around(value = "execution(* com.common.util.count.controller..*(..)) && @annotation(com.common.util.count.annotation.AnnDemo)")
     public Object testBeforeNote(ProceedingJoinPoint joinPoint) throws Throwable {
         // 用的最多通知的签名
         Signature signature = joinPoint.getSignature();

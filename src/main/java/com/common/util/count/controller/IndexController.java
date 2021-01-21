@@ -1,6 +1,6 @@
-package com.common.util.tj.controller;
+package com.common.util.count.controller;
 
-import com.common.util.tj.annotation.RequestLimit;
+import com.common.util.count.annotation.RequestLimit;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,7 +1,7 @@
-package com.common.util.tj.aspect;
+package com.common.util.count.aspect;
 
 import com.common.util.ip.HttpRequestUtil;
-import com.common.util.tj.annotation.RequestLimit;
+import com.common.util.count.annotation.RequestLimit;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -31,7 +31,7 @@ public class RequestLimitAspect {
 
     private AtomicLong countAto = new AtomicLong(0L);
 
-    @Before("execution(* com.common.util.tj.controller.*.*(..)) && @annotation(limit)")
+    @Before("execution(* com.common.util.count.controller.*.*(..)) && @annotation(limit)")
     public void requestLimit(JoinPoint joinpoint, RequestLimit limit) {
         Object[] args = joinpoint.getArgs();
         Object target = joinpoint.getTarget();
@@ -50,7 +50,7 @@ public class RequestLimitAspect {
         }
     }
 
-    @After("execution(* com.common.util.tj.controller.*.*(..)) && @annotation(com.common.util.tj.annotation.RequestLimit)")
+    @After("execution(* com.common.util.count.controller.*.*(..)) && @annotation(com.common.util.count.annotation.RequestLimit)")
     public void requestLimitAfter(JoinPoint joinpoint) {
         Object[] args = joinpoint.getArgs();
         Object target = joinpoint.getTarget();
